@@ -6,7 +6,7 @@
 
 - ローカルの変更の中から一部をステージングへ追加する
 
-`git add {ファイル}`
+`git add {file_name}`
 
 ## ローカルリポジトリへコミット
 
@@ -23,7 +23,7 @@
 
 - 特定のファイルのみ取り消す
 
-`git reset HEAD file_name`
+`git reset HEAD {file_name}`
 
 - 全てのファイルを取り消す（これ使ったことない）
 
@@ -32,7 +32,7 @@
 ## Pushの取り消し
 
 1. `git reset —hard HEAD^`
-1. `git push origin +ブランチ名`
+1. `git push origin +{branch_name}`
 
 ## ローカル編集の取り消し
 
@@ -53,12 +53,27 @@
 
 ### ブランチの切り替え
 
+`git switch {branch-name}`
+
+```
 `git checkout feature/backend-sample`
 リモートのブランチを初めて切り替える場合、`remotes/origin/`部分はいらない
+```
 
 ### ブランチの確認
 
 `git branch`
+
+### ブランチの作成
+
+- 作成元になるブランチへ切り替える
+`git switch {branch-name}`
+
+- ローカルリポジトリ内にブランチを作成
+`git checkout -b {branch-name}`
+
+- リモートリポジトリへ作成したブランチを登録
+`git push -u origin {branch-name}`
 
 ### ブランチのマージ
 
