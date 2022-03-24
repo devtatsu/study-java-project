@@ -2,18 +2,19 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 const project = 'study-java-project';
+const gituser = 'devtatsu';
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
   title: 'My Site',
   tagline: 'Dinosaurs are cool',
-  url: `https://devtatsu.github.io`,
+  url: `https://${gituser}.github.io`,
   baseUrl: `/${project}/`,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'devtatsu', // Usually your GitHub org/user name.
+  organizationName: gituser, // Usually your GitHub org/user name.
   projectName: project, // Usually your repo name.
 
   presets: [
@@ -24,8 +25,6 @@ const project = 'study-java-project';
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -48,7 +47,7 @@ const project = 'study-java-project';
             type: 'doc',
             docId: 'home',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Site Home',
           },
           {
             href: 'https://zatta.link/about/',

@@ -30,6 +30,15 @@ dependencies {
 	// testImplementation group: 'com.h2database', name: 'h2', version: '2.1.210'
 	implementation 'com.h2database:h2:2.1.210'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	// add start JUnit
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	// add start JUnit
+
 }
 
 tasks.named('test') {
