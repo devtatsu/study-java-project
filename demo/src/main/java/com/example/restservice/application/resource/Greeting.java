@@ -1,6 +1,13 @@
 package com.example.restservice.application.resource;
 
-public class Greeting {
+import java.io.Serializable;
+
+import lombok.Data;
+
+@Data
+public class Greeting implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private final long id;
 	private final String content;
