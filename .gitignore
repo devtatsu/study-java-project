@@ -38,3 +38,4 @@ out/
 
 ### H2 ###
 demom/**/*.db
+demo/testhoge.mv.db

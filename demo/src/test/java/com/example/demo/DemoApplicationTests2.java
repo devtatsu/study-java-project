@@ -3,6 +3,7 @@ package com.example.demo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.example.demo.application.controller.GreetingController;
+import com.example.demo.application.controller.request.GreetingResponse;
 import com.example.demo.application.resource.Greeting;
 
 import org.springframework.test.context.junit4.SpringRunner;
@@ -12,6 +13,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -45,6 +49,20 @@ public class DemoApplicationTests2 {
 				});
 
 		System.out.println(result.getBody().getId());
+
+	}
+
+	@Test
+	public void test0002() {
+
+		String url = "http://localhost:" + this.port + "/getgreeting";
+
+		ResponseEntity<List<GreetingResponse>> result = this.testRestTemplate.exchange(url, HttpMethod.GET,
+				HttpEntity.EMPTY,
+				new ParameterizedTypeReference<List<GreetingResponse>>() {
+				});
+
+		System.out.println(result.getBody().size());
 
 	}
 

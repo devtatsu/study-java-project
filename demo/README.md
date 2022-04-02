@@ -2,6 +2,17 @@
 
 `https://spring.pleiades.io/guides/gs/rest-service/`
 
+## Gradle
+
+`gradle clean`
+
+- ビルド
+`gradle build`
+
+- ビルド(テストスキップ)
+
+`gradle build -x test`
+
 ## 実行
 
 - サービス起動
