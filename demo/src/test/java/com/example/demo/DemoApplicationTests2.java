@@ -21,9 +21,18 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.core.ParameterizedTypeReference;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class DemoApplicationTests2 {
+
+	private static final Logger logger = LoggerFactory.getLogger(DemoApplicationTests2.class);
+
+	private static String baseUrl = "http://localhost:";
+
+	private String bufMethodName;
 
 	@Autowired
 	private TestRestTemplate testRestTemplate;
@@ -42,28 +51,69 @@ public class DemoApplicationTests2 {
 	@Test
 	public void test0001() {
 
-		String url = "http://localhost:" + this.port + "/greeting";
+		String url = baseUrl + this.port + "/greeting";
+
+		outStartEndMsg();
 
 		ResponseEntity<Greeting> result = this.testRestTemplate.exchange(url, HttpMethod.GET, HttpEntity.EMPTY,
 				new ParameterizedTypeReference<Greeting>() {
 				});
 
-		System.out.println(result.getBody().getId());
+		logger.info("> ID: {}", result.getBody().getId());
+
+		outStartEndMsg();
 
 	}
 
 	@Test
 	public void test0002() {
 
-		String url = "http://localhost:" + this.port + "/getgreeting";
+		String url = baseUrl + this.port + "/getgreeting";
+
+		outStartEndMsg();
 
 		ResponseEntity<List<GreetingResponse>> result = this.testRestTemplate.exchange(url, HttpMethod.GET,
 				HttpEntity.EMPTY,
 				new ParameterizedTypeReference<List<GreetingResponse>>() {
 				});
 
-		System.out.println(result.getBody().size());
+		logger.info("> 件数: {}", result.getBody().size());
 
+		outStartEndMsg();
+
+	}
+
+	/**
+	 * 開始終了のメッセージログ
+	 * 
+	 */
+	private void outStartEndMsg() {
+
+		String methodName = getMethodName();
+
+		if (bufMethodName == null) {
+			bufMethodName = methodName;
+			logger.info("■■■■■ {} START ■■■■■", methodName);
+			return;
+		}
+
+		if (bufMethodName == methodName) {
+			logger.info("■■■■■ {} END ■■■■■", methodName);
+			return;
+		}
+
+		logger.info("■■■■■ {} START ■■■■■", methodName);
+
+	}
+
+	/**
+	 * メソッド名取得
+	 * 
+	 * @return メソッド名
+	 * 
+	 */
+	private String getMethodName() {
+		return Thread.currentThread().getStackTrace()[3].getMethodName();
 	}
 
 }
