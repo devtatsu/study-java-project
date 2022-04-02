@@ -2,14 +2,6 @@
 
 `https://spring.pleiades.io/guides/gs/rest-service/`
 
-## 準備
-
-### vsCode
-
-- Extension Pack for Java
-- Spring Boot Extension Pack
-- Lombok Annotations Support for VS Code
-
 ## 実行
 
 - サービス起動
