@@ -1,0 +1,10 @@
+2022-04-04 07:24:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: SQLステートメントに文法エラーがあります "SELECT\000a id,\000a name\000aFROM\000a dept\000aWHERE\000a id[*]?"
+Syntax error in SQL statement "SELECT\000a id,\000a name\000aFROM\000a dept\000aWHERE\000a id[*]?"; SQL statement:
+SELECT
+ id,
+ name
+FROM
+ dept
+WHERE
+ id? [42000-210]

@@ -83,6 +83,24 @@ public class DemoApplicationTests2 {
 
 	}
 
+	@Test
+	public void test0003() {
+
+		String url = baseUrl + this.port + "/getgreetingtest";
+
+		outStartEndMsg();
+
+		ResponseEntity<List<GreetingResponse>> result = this.testRestTemplate.exchange(url, HttpMethod.GET,
+				HttpEntity.EMPTY,
+				new ParameterizedTypeReference<List<GreetingResponse>>() {
+				});
+
+		logger.info("> 件数: {}", result.getBody().size());
+
+		outStartEndMsg();
+
+	}
+
 	/**
 	 * 開始終了のメッセージログ
 	 * 

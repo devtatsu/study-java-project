@@ -20,7 +20,7 @@ public class DeptModel implements Serializable {
     @Column(name = "id")
     private long id;
 
-    // 氏名名
+    // 氏名
     @Column(name = "name")
     private String name;
 
