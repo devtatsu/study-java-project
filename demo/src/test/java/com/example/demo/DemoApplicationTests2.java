@@ -23,6 +23,7 @@ import org.springframework.core.ParameterizedTypeReference;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.example.demo.application.common.constants.AppServerServiceURI;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -51,7 +52,7 @@ public class DemoApplicationTests2 {
 	@Test
 	public void test0001() {
 
-		String url = baseUrl + this.port + "/greeting";
+		String url = baseUrl + this.port + AppServerServiceURI.GREETING;
 
 		outStartEndMsg();
 
@@ -68,7 +69,7 @@ public class DemoApplicationTests2 {
 	@Test
 	public void test0002() {
 
-		String url = baseUrl + this.port + "/getgreeting";
+		String url = baseUrl + this.port + AppServerServiceURI.GET_GREETING;
 
 		outStartEndMsg();
 
@@ -86,7 +87,7 @@ public class DemoApplicationTests2 {
 	@Test
 	public void test0003() {
 
-		String url = baseUrl + this.port + "/getgreetingtest";
+		String url = baseUrl + this.port + AppServerServiceURI.GET_GREETING_TEST;
 
 		outStartEndMsg();
 
@@ -96,6 +97,16 @@ public class DemoApplicationTests2 {
 				});
 
 		logger.info("> 件数: {}", result.getBody().size());
+
+		for (GreetingResponse oneRecord : result.getBody()) {
+			logger.info("> 件数: {}", oneRecord.getId());
+		}
+
+		for (int i = 0; i < result.getBody().size(); i++) {
+			logger.info("> {} 件目", i + 1);
+			logger.info("> ID: {}", result.getBody().get(i).getId());
+			logger.info("> NAME: {}", result.getBody().get(i).getName());
+		}
 
 		outStartEndMsg();
 
