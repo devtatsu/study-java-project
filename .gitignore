@@ -33,9 +33,6 @@ out/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
-.vscode/
-
 ### H2 ###
 demom/**/*.db
 demo/testhoge.mv.db
