@@ -4,5 +4,6 @@ public class AppServerServiceURI {
 
     public static final String GREETING = "/greeting";
     public static final String GET_GREETING = "/getgreeting";
+    public static final String GET_GREETING_TEST = "/getgreetingtest";
 
 }

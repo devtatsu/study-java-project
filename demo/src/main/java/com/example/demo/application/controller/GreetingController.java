@@ -39,4 +39,13 @@ public class GreetingController {
 
 	}
 
+	@GetMapping(AppServerServiceURI.GET_GREETING_TEST)
+	public ResponseEntity<List<GreetingResponse>> getGreetingTest() {
+
+		List<GreetingResponse> retEntity = this.service.getFind();
+
+		return new ResponseEntity<>(retEntity, HttpStatus.OK);
+
+	}
+
 }
