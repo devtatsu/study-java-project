@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.example.demo.application.domain.models.DeptQuery;
+
 import org.springframework.stereotype.Repository;
 import com.example.demo.application.common.constants.QueryName;
 

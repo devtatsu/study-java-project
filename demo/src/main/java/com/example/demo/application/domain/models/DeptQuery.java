@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import com.example.demo.application.common.constants.QueryName;
 
 @Data
-// @Entity(name = "DEPT")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
