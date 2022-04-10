@@ -18,7 +18,7 @@ public class DeptQueryRepository {
     public List<DeptQuery> findTest(long id) {
 
         return this.entityMgr.createNamedQuery(QueryName.GET_DEPT, DeptQuery.class)
-                .setParameter("id", id)
+                .setParameter("paramId", id)
                 .getResultList();
 
     }
