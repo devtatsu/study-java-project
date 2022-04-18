@@ -1,6 +1,8 @@
 package com.example.demo.base;
 
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -93,6 +95,8 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 		this.endPoint = baseUrl + port + endPointResource;
 
 		HttpEntity<T2> entity = new HttpEntity<>(param);
+
+		this.getList = new ArrayList<>();
 
 		ResponseEntity<List<T3>> result = (ResponseEntity<List<T3>>) this.testRestTemplate.exchange(this.endPoint,
 				HttpMethod.GET, entity,
