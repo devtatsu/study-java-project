@@ -2,7 +2,6 @@ package com.example.demo.base;
 
 import org.junit.runner.RunWith;
 import java.util.List;
-import com.example.demo.application.controller.request.GreetingResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
