@@ -1,14 +1,15 @@
 package com.example.demo.application.controller.request;
 
 import java.io.Serializable;
-// import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
+import lombok.AllArgsConstructor;
 
 @Data
+// @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GreetingResponse implements Serializable {
 

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.demo;
 
 import com.example.demo.application.controller.GreetingController;
 

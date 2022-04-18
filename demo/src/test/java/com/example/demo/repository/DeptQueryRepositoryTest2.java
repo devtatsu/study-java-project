@@ -11,6 +11,12 @@ import org.springframework.test.context.jdbc.Sql;
 
 public class DeptQueryRepositoryTest2 extends QueryBaseRepositoryTest<DeptQueryRepository, DeptQueryRepositoryTest2> {
 
+    @Override
+    public void setProperty() {
+        super.logCls = DeptQueryRepositoryTest2.class;
+        super.repositoryTest = new DeptQueryRepository();
+    }
+
     @Test
     @DisplayName("▼▼▼▼▼ test001 DisplayName ▼▼▼▼▼")
     @Sql(scripts = "/deptquery/setUpData.sql")
@@ -20,12 +26,6 @@ public class DeptQueryRepositoryTest2 extends QueryBaseRepositoryTest<DeptQueryR
 
         super.logger.info("> 件数: {}", resultList.size());
 
-    }
-
-    @Override
-    public void setProperty() {
-        super.logCls = DeptQueryRepositoryTest2.class;
-        super.repositoryTest = new DeptQueryRepository();
     }
 
 }
