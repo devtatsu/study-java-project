@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,9 +27,9 @@ import com.example.demo.application.common.constants.AppServerServiceURI;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class DemoApplicationTests2 {
+public class SampleDemoApplicationTests {
 
-	private static final Logger logger = LoggerFactory.getLogger(DemoApplicationTests2.class);
+	private static final Logger logger = LoggerFactory.getLogger(SampleDemoApplicationTests.class);
 
 	private static String baseUrl = "http://localhost:";
 

@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,7 +40,7 @@ public class GreetingController {
 
 	}
 
-	@GetMapping(AppServerServiceURI.GET_GREETING_TEST)
+	@GetMapping(value = AppServerServiceURI.GET_GREETING_TEST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<GreetingResponse>> getGreetingTest() {
 
 		List<GreetingResponse> retEntity = this.service.getFind();

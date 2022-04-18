@@ -26,7 +26,7 @@ query =
     "FROM\n" +
     " dept\n" +
     "WHERE\n" +
-    " id = :id\n",
+    " id = :paramId\n",
     resultSetMapping = QueryName.GET_DEPT
 )
 // @formatter:on

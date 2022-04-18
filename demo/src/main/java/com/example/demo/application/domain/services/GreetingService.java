@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-// import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -57,7 +56,7 @@ public class GreetingService {
         List<GreetingResponse> resultList = new ArrayList<GreetingResponse>();
         GreetingResponse wkResponse;
 
-        List<DeptQuery> resultRecord = this.repository2.findTest(1);
+        List<DeptQuery> resultRecord = this.repository2.findTest(2);
         if (resultRecord.isEmpty()) {
             return new ArrayList<GreetingResponse>();
         }
