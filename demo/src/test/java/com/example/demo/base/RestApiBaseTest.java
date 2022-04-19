@@ -4,11 +4,13 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -44,9 +46,11 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	private String endPoint;
 
-	protected List<T3> getList;
+	protected List<T3> getResponseList;
 
-	protected Class<T3> responseCls;
+	protected T3 getResponse;
+
+	public Class<T3> responseCls;
 
 	@Before
 	public void setUp() {
@@ -59,19 +63,68 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	}
 
+	protected ResponseEntity<? extends Object> curlGetList(String endPointResource) {
+
+		this.endPoint = baseUrl + port + endPointResource;
+
+		HttpEntity<T2> entity = new HttpEntity<>(this.param);
+
+		ResponseEntity<List<T3>> result = (ResponseEntity<List<T3>>) this.testRestTemplate.exchange(this.endPoint,
+				HttpMethod.GET, entity,
+				new ParameterizedTypeReference<List<T3>>() {
+				});
+
+		createGetList(result);
+
+		return result;
+
+	}
+
+	protected ResponseEntity<? extends Object> curlGet(String endPointResource) {
+
+		this.endPoint = baseUrl + port + endPointResource;
+
+		HttpEntity<T2> entity = new HttpEntity<>(this.param);
+
+		ResponseEntity<T3> result = (ResponseEntity<T3>) this.testRestTemplate.exchange(this.endPoint,
+				HttpMethod.GET, entity,
+				this.responseCls);
+
+		createGet(result);
+
+		return result;
+
+	}
+
 	private void createGetList(ResponseEntity<List<T3>> result) {
 
 		ObjectMapper mapper = new ObjectMapper();
 
+		this.getResponseList = new ArrayList<>();
+
 		for (int i = 0; i < result.getBody().size(); i++) {
 			try {
-				getList.add((T3) mapper.readValue(objToJsonStr(result.getBody().get(i)), responseCls));
+				getResponseList.add((T3) mapper.readValue(objToJsonStr(result.getBody().get(i)), responseCls));
 			} catch (JsonMappingException e) {
 				logger.error("json mapper error(JsonMappingException): {}", e.getMessage());
 			} catch (JsonProcessingException e) {
 				logger.error("json mapper error(JsonProcessingException): {}", e.getMessage());
 			}
 
+		}
+
+	}
+
+	private void createGet(ResponseEntity<T3> result) {
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			getResponse = mapper.readValue(objToJsonStr(result.getBody()), responseCls);
+		} catch (JsonMappingException e) {
+			logger.error("json mapper error(JsonMappingException): {}", e.getMessage());
+		} catch (JsonProcessingException e) {
+			logger.error("json mapper error(JsonProcessingException): {}", e.getMessage());
 		}
 
 	}
@@ -87,25 +140,6 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 	private String objToJsonStr(Object json) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writeValueAsString(json);
-	}
-
-	@SuppressWarnings("unchecked")
-	protected ResponseEntity<? extends Object> runTestGetList(String endPointResource) {
-
-		this.endPoint = baseUrl + port + endPointResource;
-
-		HttpEntity<T2> entity = new HttpEntity<>(param);
-
-		this.getList = new ArrayList<>();
-
-		ResponseEntity<List<T3>> result = (ResponseEntity<List<T3>>) this.testRestTemplate.exchange(this.endPoint,
-				HttpMethod.GET, entity,
-				this.getList.getClass());
-
-		createGetList(result);
-
-		return result;
-
 	}
 
 	@After

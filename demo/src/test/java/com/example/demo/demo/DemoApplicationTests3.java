@@ -19,14 +19,12 @@ public class DemoApplicationTests3 extends RestApiBaseTest<DemoApplicationTests3
 	@SuppressWarnings("unchecked")
 	public void test0001() {
 
-		setProperty();
-
-		ResponseEntity<List<GreetingResponse>> wkResult = (ResponseEntity<List<GreetingResponse>>) super.runTestGetList(
+		ResponseEntity<List<GreetingResponse>> wkResult = (ResponseEntity<List<GreetingResponse>>) super.curlGetList(
 				AppServerServiceURI.GET_GREETING);
 
 		logger.info("> STATUS: {}", wkResult.getStatusCode());
 
-		for (GreetingResponse one : super.getList) {
+		for (GreetingResponse one : super.getResponseList) {
 			logger.info("> ID: {}", one.getId());
 			logger.info("> NAME: {}", one.getName());
 		}
