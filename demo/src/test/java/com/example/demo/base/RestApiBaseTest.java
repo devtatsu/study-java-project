@@ -34,7 +34,7 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	protected Logger logger;
 
-	protected static String baseUrl = "http://localhost:";
+	protected static String BASE_URL = "http://localhost:";
 
 	@Autowired
 	protected TestRestTemplate testRestTemplate;
@@ -57,15 +57,15 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 		setProperty();
 
-		this.logger = LoggerFactory.getLogger(logCls);
+		this.logger = LoggerFactory.getLogger(this.logCls);
 
-		logger.info("■■■■■ START ■■■■■");
+		this.logger.info("■■■■■ START ■■■■■");
 
 	}
 
 	protected ResponseEntity<? extends Object> curlGetList(String endPointResource) {
 
-		this.endPoint = baseUrl + port + endPointResource;
+		this.endPoint = BASE_URL + this.port + endPointResource;
 
 		HttpEntity<T2> entity = new HttpEntity<>(this.param);
 
@@ -82,7 +82,7 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	protected ResponseEntity<? extends Object> curlGet(String endPointResource) {
 
-		this.endPoint = baseUrl + port + endPointResource;
+		this.endPoint = BASE_URL + this.port + endPointResource;
 
 		HttpEntity<T2> entity = new HttpEntity<>(this.param);
 
@@ -104,11 +104,12 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 		for (int i = 0; i < result.getBody().size(); i++) {
 			try {
-				getResponseList.add((T3) mapper.readValue(objToJsonStr(result.getBody().get(i)), responseCls));
+				this.getResponseList
+						.add((T3) mapper.readValue(objToJsonStr(result.getBody().get(i)), this.responseCls));
 			} catch (JsonMappingException e) {
-				logger.error("json mapper error(JsonMappingException): {}", e.getMessage());
+				this.logger.error("json mapper error(JsonMappingException): {}", e.getMessage());
 			} catch (JsonProcessingException e) {
-				logger.error("json mapper error(JsonProcessingException): {}", e.getMessage());
+				this.logger.error("json mapper error(JsonProcessingException): {}", e.getMessage());
 			}
 
 		}
@@ -120,11 +121,11 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 		ObjectMapper mapper = new ObjectMapper();
 
 		try {
-			getResponse = mapper.readValue(objToJsonStr(result.getBody()), responseCls);
+			this.getResponse = mapper.readValue(objToJsonStr(result.getBody()), this.responseCls);
 		} catch (JsonMappingException e) {
-			logger.error("json mapper error(JsonMappingException): {}", e.getMessage());
+			this.logger.error("json mapper error(JsonMappingException): {}", e.getMessage());
 		} catch (JsonProcessingException e) {
-			logger.error("json mapper error(JsonProcessingException): {}", e.getMessage());
+			this.logger.error("json mapper error(JsonProcessingException): {}", e.getMessage());
 		}
 
 	}
@@ -144,7 +145,7 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	@After
 	public void endtMsg() {
-		logger.info("■■■■■ END ■■■■■");
+		this.logger.info("■■■■■ END ■■■■■");
 	}
 
 }
