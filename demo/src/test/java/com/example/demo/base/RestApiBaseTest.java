@@ -41,10 +41,10 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 	private String base_url;
 
 	@Autowired
-	protected TestRestTemplate testRestTemplate;
+	private TestRestTemplate testRestTemplate;
 
 	@LocalServerPort
-	protected int port = 8090;
+	private int port = 8090;
 
 	public abstract void setProperty();
 
