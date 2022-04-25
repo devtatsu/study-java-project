@@ -5,7 +5,10 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.application.common.config.PropertyConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -25,6 +28,7 @@ import org.junit.After;
 import org.junit.Before;
 
 @RunWith(SpringRunner.class)
+@TestPropertySource(locations = "/application.local.properties")
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class RestApiBaseTest<T1, T2, T3> {
 
@@ -34,13 +38,13 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	protected Logger logger;
 
-	protected static String BASE_URL = "http://localhost:";
+	private String base_url;
 
 	@Autowired
-	protected TestRestTemplate testRestTemplate;
+	private TestRestTemplate testRestTemplate;
 
 	@LocalServerPort
-	protected int port = 8090;
+	private int port = 8090;
 
 	public abstract void setProperty();
 
@@ -52,10 +56,15 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	public Class<T3> responseCls;
 
+	@Autowired
+	private PropertyConfig propService;
+
 	@Before
 	public void setUp() {
 
 		setProperty();
+
+		this.base_url = this.propService.getBaseurl();
 
 		this.logger = LoggerFactory.getLogger(this.logCls);
 
@@ -63,9 +72,13 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	}
 
+	private void createEndPoint(String endPointResource) {
+		this.endPoint = this.base_url + this.port + endPointResource;
+	}
+
 	protected ResponseEntity<? extends Object> curlGetList(String endPointResource) {
 
-		this.endPoint = BASE_URL + this.port + endPointResource;
+		createEndPoint(endPointResource);
 
 		HttpEntity<T2> entity = new HttpEntity<>(this.param);
 
@@ -82,7 +95,7 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	protected ResponseEntity<? extends Object> curlGet(String endPointResource) {
 
-		this.endPoint = BASE_URL + this.port + endPointResource;
+		createEndPoint(endPointResource);
 
 		HttpEntity<T2> entity = new HttpEntity<>(this.param);
 
