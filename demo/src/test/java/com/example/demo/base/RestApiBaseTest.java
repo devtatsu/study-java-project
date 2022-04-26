@@ -159,7 +159,7 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 	 * @param endPointResource リクエスト先URI
 	 * 
 	 */
-	protected void curlPost(String endPointResource) {
+	protected ResponseEntity<?> curlPost(String endPointResource) {
 
 		createEndPoint(endPointResource);
 
@@ -171,12 +171,14 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 					.headers(this.headers)
 					.body(this.param);
 
-			this.testRestTemplate.exchange(requestEntity, Object.class);
+			return this.testRestTemplate.exchange(requestEntity, Object.class);
 
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		return null;
 
 	}
 

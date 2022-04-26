@@ -1,20 +1,23 @@
 package com.example.demo.employee;
 
 import org.junit.Test;
+import org.springframework.http.ResponseEntity;
 
 import com.example.demo.base.RestApiBaseTest;
 
 import com.example.demo.application.common.constants.AppServerServiceURI;
 import com.example.demo.application.controller.request.EmployeePostRequest;
-import com.example.demo.application.controller.response.GreetingResponse;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import org.springframework.http.HttpStatus;
 
 public class EmployeeApplicationTest
-		extends RestApiBaseTest<EmployeeApplicationTest, EmployeePostRequest, GreetingResponse> {
+		extends RestApiBaseTest<EmployeeApplicationTest, EmployeePostRequest, Object> {
 
 	@Override
 	public void setProperty() {
 		super.logCls = EmployeeApplicationTest.class;
-		super.responseCls = GreetingResponse.class;
 	}
 
 	@Test
@@ -36,7 +39,9 @@ public class EmployeeApplicationTest
 		super.param.setLastname(assertDataMap.get("lastname").toString());
 		super.param.setHiredate(hireDate);
 
-		super.curlPost(AppServerServiceURI.POST_EMPLOYEE);
+		ResponseEntity<?> response = super.curlPost(AppServerServiceURI.POST_EMPLOYEE);
+
+		assertThat(response.getStatusCode(), is(HttpStatus.OK));
 
 		super.chkSql = String.format(sql, hireDate);
 
@@ -63,7 +68,9 @@ public class EmployeeApplicationTest
 		super.param.setLastname(assertDataMap.get("lastname").toString());
 		super.param.setHiredate(hireDate);
 
-		super.curlPost(AppServerServiceURI.POST_EMPLOYEE);
+		ResponseEntity<?> response = super.curlPost(AppServerServiceURI.POST_EMPLOYEE);
+
+		assertThat(response.getStatusCode(), is(HttpStatus.OK));
 
 		super.chkSql = String.format(sql, hireDate);
 
