@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.example.demo.application.common.config.PropertyConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,13 +20,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.junit.After;
 import org.junit.Before;
+
+import org.springframework.http.RequestEntity;
+import org.springframework.http.HttpHeaders;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource(locations = "/application.local.properties")
@@ -58,6 +65,11 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	@Autowired
 	private PropertyConfig propService;
+
+	protected HttpHeaders headers;
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@Before
 	public void setUp() {
@@ -106,6 +118,27 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 		createGet(result);
 
 		return result;
+
+	}
+
+	protected void curlPost(String endPointResource) {
+
+		createEndPoint(endPointResource);
+
+		RequestEntity<?> requestEntity;
+
+		try {
+			requestEntity = RequestEntity
+					.post(new URI(this.endPoint))
+					.headers(this.headers)
+					.body(this.param);
+
+			this.testRestTemplate.exchange(requestEntity, Object.class);
+
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -159,6 +192,10 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 	@After
 	public void endtMsg() {
 		this.logger.info("■■■■■ END ■■■■■");
+	}
+
+	protected List<Map<String, Object>> getData(String sql) {
+		return jdbcTemplate.queryForList(sql);
 	}
 
 }

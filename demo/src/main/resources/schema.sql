@@ -10,18 +10,20 @@ CREATE TABLE DEPT (
 DROP TABLE IF EXISTS employee;
 
 CREATE TABLE employee (
-    employee_id INT NOT NULL PRIMARY KEY,
+    employee_id IDENTITY NOT NULL PRIMARY KEY,
     firstname VARCHAR(255),
     lastname VARCHAR(255),
-    department VARCHAR(255)
+    department VARCHAR(255),
+    hire_date INT,
+    serial_no INT
 );
 
 -- プロフィール
 DROP TABLE IF EXISTS profile;
 
 CREATE TABLE profile (
-    profile_id INT NOT NULL PRIMARY KEY,
-    employee_id INT,
+    profile_id IDENTITY NOT NULL PRIMARY KEY,
+    employee_id BIGINT,
     address VARCHAR(255),
     age INT
 );
@@ -30,7 +32,7 @@ CREATE TABLE profile (
 DROP TABLE IF EXISTS skill;
 
 CREATE TABLE skill (
-    skill_id INT NOT NULL PRIMARY KEY,
-    employee_id INT,
+    skill_id IDENTITY NOT NULL PRIMARY KEY,
+    employee_id BIGINT,
     skill_content VARCHAR(255)
 );

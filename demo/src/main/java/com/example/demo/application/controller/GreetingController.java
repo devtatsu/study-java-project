@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.application.common.constants.AppServerServiceURI;
-import com.example.demo.application.controller.request.GreetingResponse;
+import com.example.demo.application.controller.response.GreetingResponse;
 import com.example.demo.application.domain.services.GreetingService;
 import org.springframework.http.ResponseEntity;
 
