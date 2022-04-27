@@ -4,49 +4,130 @@ plugins {
 	id 'java'
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
-// sourceCompatibility = '11'
-
 repositories {
 	mavenCentral()
 }
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
-	implementation 'junit:junit:4.+'
-	implementation 'org.projectlombok:lombok'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok'
-
-	implementation 'com.h2database:h2:2.1.210'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
+bootJar {
+	enabled = false
 }
 
-test {
-	useJUnitPlatform()
+jar {
+	enabled = false
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = [ 'src/main/java' ]
+subprojects {
+
+    apply plugin: "java"
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+
+	group = 'com.example'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '1.8'
+	// sourceCompatibility = '11'
+
+	repositories {
+		mavenCentral()
+	}
+
+    configurations {
+		// developmentOnly
+        // runtimeClasspath {
+        //     extendsFrom developmentOnly
+        // }
+        compileOnly {
+            extendsFrom annotationProcessor
         }
     }
+
+	dependencies {
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		testImplementation('org.springframework.boot:spring-boot-starter-test') {
+			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		}
+		implementation 'junit:junit:4.+'
+		implementation 'org.projectlombok:lombok'
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+		testCompileOnly 'org.projectlombok:lombok'
+		testAnnotationProcessor 'org.projectlombok:lombok'
+		implementation fileTree(dir: 'libs', includes: ['*.jar'])
+	}
+
     test {
-        java {
-            srcDirs = [ 'src/test/java' ]
-        }
-        resources {
-            srcDirs = [ 'src/test/resources' ]
-        }
+        useJUnitPlatform()
     }
+
+	sourceSets {
+		main {
+			java {
+				srcDirs = [ 'src/main/java' ]
+			}
+		}
+		test {
+			java {
+				srcDirs = [ 'src/test/java' ]
+			}
+			resources {
+				srcDirs = [ 'src/test/resources' ]
+			}
+		}
+	}
+
+}
+
+project(":rest-api") {
+
+    bootJar {
+        enabled = true
+    }
+
+	jar {
+		enabled = true
+	}
+
+    dependencies {
+		implementation 'com.h2database:h2:2.1.210'
+		implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		// implementation project(":spring-jpa")
+		implementation project(':spring-jpa')
+		// implementation project(":spring-jpa").sourceSets.main.output
+		// compile project(':spring-jpa').sourceSets.main.output
+		// compileOnly project(':spring-jpa').sourceSets.main.output
+		// compile project(':spring-jpa')
+		// compileOnly project(':spring-jpa')
+		// compileOnly files('../../spring-jpa/build/lib/spring-jpa-0.0.1-SNAPSHOT-plain.jar')
+		implementation project(":common")
+    }
+}
+
+project(":spring-jpa") {
+
+    bootJar {
+        enabled = false
+    }
+
+	jar {
+		enabled = true
+	}
+
+    dependencies {
+		implementation 'com.h2database:h2:2.1.210'
+		implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    }
+}
+
+project(":common") {
+
+    bootJar {
+        enabled = false
+    }
+
+	jar {
+		enabled = true
+	}
+
 }
