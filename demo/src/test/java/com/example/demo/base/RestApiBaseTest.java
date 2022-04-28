@@ -3,7 +3,9 @@ package com.example.demo.base;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.example.demo.application.common.config.PropertyConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,13 +21,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.junit.After;
 import org.junit.Before;
+
+import org.springframework.http.RequestEntity;
+import org.springframework.http.HttpHeaders;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource(locations = "/application.local.properties")
@@ -59,6 +70,16 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 	@Autowired
 	private PropertyConfig propService;
 
+	protected HttpHeaders headers;
+
+	protected List<Map<String, Object>> assertDataList;
+	protected Map<String, Object> assertDataMap;
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	protected String chkSql;
+
 	@Before
 	public void setUp() {
 
@@ -68,14 +89,30 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 		this.logger = LoggerFactory.getLogger(this.logCls);
 
+		this.assertDataList = new ArrayList<Map<String, Object>>();
+		this.assertDataMap = new LinkedHashMap<>();
+
 		this.logger.info("■■■■■ START ■■■■■");
 
 	}
 
+	/**
+	 * リクエスト先URI生成
+	 * 
+	 * @param endPointResource エンドポイント
+	 * 
+	 */
 	private void createEndPoint(String endPointResource) {
 		this.endPoint = this.base_url + this.port + endPointResource;
 	}
 
+	/**
+	 * HTTPリクエスト(GET)実行
+	 * 
+	 * @param endPointResource リクエスト先URI
+	 * @return リクエスト結果(n件)
+	 * 
+	 */
 	protected ResponseEntity<? extends Object> curlGetList(String endPointResource) {
 
 		createEndPoint(endPointResource);
@@ -93,6 +130,13 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 
 	}
 
+	/**
+	 * HTTPリクエスト(GET)実行
+	 * 
+	 * @param endPointResource リクエスト先URI
+	 * @return リクエスト結果(1件)
+	 * 
+	 */
 	protected ResponseEntity<? extends Object> curlGet(String endPointResource) {
 
 		createEndPoint(endPointResource);
@@ -106,6 +150,35 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 		createGet(result);
 
 		return result;
+
+	}
+
+	/**
+	 * HTTPリクエスト(POST)実行
+	 * 
+	 * @param endPointResource リクエスト先URI
+	 * 
+	 */
+	protected ResponseEntity<?> curlPost(String endPointResource) {
+
+		createEndPoint(endPointResource);
+
+		RequestEntity<?> requestEntity;
+
+		try {
+			requestEntity = RequestEntity
+					.post(new URI(this.endPoint))
+					.headers(this.headers)
+					.body(this.param);
+
+			return this.testRestTemplate.exchange(requestEntity, Object.class);
+
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
 
 	}
 
@@ -159,6 +232,49 @@ public abstract class RestApiBaseTest<T1, T2, T3> {
 	@After
 	public void endtMsg() {
 		this.logger.info("■■■■■ END ■■■■■");
+	}
+
+	/**
+	 * データ取得
+	 * 
+	 * @param sql 実行SQL
+	 * @return 取得結果
+	 * 
+	 */
+	protected List<Map<String, Object>> getData(String sql) {
+		return jdbcTemplate.queryForList(sql);
+	}
+
+	/**
+	 * 期待値と実測値が一致するかの検証
+	 * 
+	 */
+	protected void chkAssertData() {
+
+		List<Map<String, Object>> getDataList = getData(this.chkSql);
+
+		assertThat(getDataList.size(), is(assertDataList.size()));
+
+		for (Map<String, Object> oneAssertMap : assertDataList) {
+
+			for (String assertKey : oneAssertMap.keySet()) {
+
+				Object val = oneAssertMap.get(assertKey);
+
+				for (Map<String, Object> oneMap : getDataList) {
+
+					if (!oneMap.containsKey(assertKey)) {
+						continue;
+					}
+
+					logger.info("Column Name:[{}]、Value:[{}]", assertKey, oneMap.get(assertKey));
+					assertThat(oneMap.get(assertKey), is(val));
+
+				}
+			}
+
+		}
+
 	}
 
 }

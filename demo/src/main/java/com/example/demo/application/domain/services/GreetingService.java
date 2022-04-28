@@ -1,6 +1,6 @@
 package com.example.demo.application.domain.services;
 
-import com.example.demo.application.controller.request.GreetingResponse;
+import com.example.demo.application.controller.response.GreetingResponse;
 import com.example.demo.application.domain.models.DeptModel;
 import com.example.demo.application.domain.models.DeptQuery;
 import com.example.demo.application.domain.repositories.DeptRepository;

@@ -3,7 +3,7 @@ package com.example.demo.demo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import com.example.demo.application.controller.GreetingController;
-import com.example.demo.application.controller.request.GreetingResponse;
+import com.example.demo.application.controller.response.GreetingResponse;
 import com.example.demo.application.resource.Greeting;
 
 import org.springframework.test.context.junit4.SpringRunner;
