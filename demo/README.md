@@ -4,6 +4,7 @@
 
 ## Gradle
 
+- クリーン
 `gradle clean`
 
 - ビルド
@@ -13,13 +14,23 @@
 
 `gradle build -x test`
 
+- クリーン & ビルド
+`gradle clean build`
+
+- クリーン & ビルド(テストスキップ)
+`gradle clean build -x test`
+
+- サブプロジェクト単位のビルド
+
+`gradle :{$sub-project-name}:build`
+
 ## 実行
 
 - サービス起動
 
 `demo`直下で、以下のコマンドを実行。
 
-`./gradlew bootRun`
+`./gradlew :rest-api:bootRun`
 
 - 確認
 
@@ -40,8 +51,23 @@
 
 ### プロジェクト構成
 
+- 全体のプロジェクト構成
+マルチプロジェクト
+
+- サブプロジェクト含めたプロジェクト（レイア）構成
 https://qiita.com/YutaKase6/items/7d88fa23f81366905270
 
 ### DB
 
+- H2
+このrepositoryをcloneして、簡易的に利用が出来ることを目的に、デフォルト設定は`H2`を利用しています。
 
+## トラブルシューティング
+
+### プロジェクト構成後、`import`が正しく読み込まれない
+
+プロジェクト構成変更直後、`vsCode`の場合、正しくパスが読み込まれないことがある。
+その為、`import`文が正しく読み込まれない場合は、以下を実行すれば、解消される。
+
+- `demo`直下で、`gradle eclipse`コマンドを実行する
+- `vsCode`を再起動する
