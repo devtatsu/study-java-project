@@ -1,10 +1,10 @@
 package com.example.demo.demo;
 
 import org.junit.Test;
-import com.example.demo.application.resource.Greeting;
+import com.example.demo.resource.Greeting;
 import com.example.demo.base.RestApiBaseTest;
 import org.springframework.http.ResponseEntity;
-import com.example.demo.application.common.constants.AppServerServiceURI;
+import com.example.demo.common.constants.AppServerServiceURI;
 
 public class DemoApplicationTests4 extends RestApiBaseTest<DemoApplicationTests4, String, Greeting> {
 

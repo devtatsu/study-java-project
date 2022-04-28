@@ -2,9 +2,9 @@ package com.example.demo.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import com.example.demo.application.controller.GreetingController;
-import com.example.demo.application.controller.response.GreetingResponse;
-import com.example.demo.application.resource.Greeting;
+import com.example.demo.controller.GreetingController;
+import com.example.demo.controller.response.GreetingResponse;
+import com.example.demo.resource.Greeting;
 
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -23,7 +23,7 @@ import org.springframework.core.ParameterizedTypeReference;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.example.demo.application.common.constants.AppServerServiceURI;
+import com.example.demo.common.constants.AppServerServiceURI;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

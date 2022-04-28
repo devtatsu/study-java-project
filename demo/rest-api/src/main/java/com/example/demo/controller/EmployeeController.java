@@ -1,8 +1,8 @@
-package com.example.demo.application.controller;
+package com.example.demo.controller;
 
-import com.example.demo.application.common.constants.AppServerServiceURI;
-import com.example.demo.application.controller.request.EmployeePostRequest;
-import com.example.demo.application.domain.services.EmployeeService;
+import com.example.demo.common.constants.AppServerServiceURI;
+import com.example.demo.controller.request.EmployeePostRequest;
+import com.example.demo.domain.services.EmployeeService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.6'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'eclipse'
 }
 
 repositories {
@@ -32,10 +33,6 @@ subprojects {
 	}
 
     configurations {
-		// developmentOnly
-        // runtimeClasspath {
-        //     extendsFrom developmentOnly
-        // }
         compileOnly {
             extendsFrom annotationProcessor
         }
@@ -91,14 +88,7 @@ project(":rest-api") {
 		implementation 'com.h2database:h2:2.1.210'
 		implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-		// implementation project(":spring-jpa")
 		implementation project(':spring-jpa')
-		// implementation project(":spring-jpa").sourceSets.main.output
-		// compile project(':spring-jpa').sourceSets.main.output
-		// compileOnly project(':spring-jpa').sourceSets.main.output
-		// compile project(':spring-jpa')
-		// compileOnly project(':spring-jpa')
-		// compileOnly files('../../spring-jpa/build/lib/spring-jpa-0.0.1-SNAPSHOT-plain.jar')
 		implementation project(":common")
     }
 }

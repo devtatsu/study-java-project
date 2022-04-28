@@ -1,6 +1,6 @@
-package com.example.demo.application.domain.services;
+package com.example.demo.domain.services;
 
-import com.example.demo.application.controller.response.GreetingResponse;
+import com.example.demo.controller.response.GreetingResponse;
 import com.example.demo.jpa.domain.models.DeptModel;
 import com.example.demo.jpa.domain.models.DeptQuery;
 import com.example.demo.jpa.domain.repositories.DeptQueryRepository;

@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 
 import com.example.demo.base.RestApiBaseTest;
 
-import com.example.demo.application.common.constants.AppServerServiceURI;
-import com.example.demo.application.controller.request.EmployeePostRequest;
+import com.example.demo.common.constants.AppServerServiceURI;
+import com.example.demo.controller.request.EmployeePostRequest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

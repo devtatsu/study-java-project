@@ -5,8 +5,8 @@ import org.junit.Test;
 import com.example.demo.base.RestApiBaseTest;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
-import com.example.demo.application.common.constants.AppServerServiceURI;
-import com.example.demo.application.controller.response.GreetingResponse;
+import com.example.demo.common.constants.AppServerServiceURI;
+import com.example.demo.controller.response.GreetingResponse;
 
 public class DemoApplicationTests3 extends RestApiBaseTest<DemoApplicationTests3, String, GreetingResponse> {
 

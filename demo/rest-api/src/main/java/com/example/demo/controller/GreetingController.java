@@ -1,16 +1,16 @@
-package com.example.demo.application.controller;
+package com.example.demo.controller;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.example.demo.application.resource.Greeting;
+import com.example.demo.resource.Greeting;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.demo.application.common.constants.AppServerServiceURI;
-import com.example.demo.application.controller.response.GreetingResponse;
-import com.example.demo.application.domain.services.GreetingService;
+import com.example.demo.common.constants.AppServerServiceURI;
+import com.example.demo.controller.response.GreetingResponse;
+import com.example.demo.domain.services.GreetingService;
 import org.springframework.http.ResponseEntity;
 
 import lombok.RequiredArgsConstructor;

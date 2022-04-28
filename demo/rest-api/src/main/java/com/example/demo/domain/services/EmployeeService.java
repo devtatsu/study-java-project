@@ -1,4 +1,4 @@
-package com.example.demo.application.domain.services;
+package com.example.demo.domain.services;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.example.demo.application.controller.request.EmployeePostRequest;
+import com.example.demo.controller.request.EmployeePostRequest;
 import com.example.demo.jpa.domain.models.Employee;
 import com.example.demo.jpa.domain.repositories.EmployeeRepository;
 

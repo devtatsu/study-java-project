@@ -1,6 +1,6 @@
 package com.example.demo.demo;
 
-import com.example.demo.application.controller.GreetingController;
+import com.example.demo.controller.GreetingController;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
