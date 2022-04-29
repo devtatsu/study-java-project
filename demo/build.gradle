@@ -50,6 +50,9 @@ subprojects {
 		testCompileOnly 'org.projectlombok:lombok'
 		testAnnotationProcessor 'org.projectlombok:lombok'
 		implementation fileTree(dir: 'libs', includes: ['*.jar'])
+		implementation 'com.h2database:h2:2.1.210'
+		implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	}
 
     test {
@@ -85,9 +88,6 @@ project(":rest-api") {
 	}
 
     dependencies {
-		implementation 'com.h2database:h2:2.1.210'
-		implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 		implementation project(':spring-jpa')
 		implementation project(":common")
     }
@@ -102,12 +102,7 @@ project(":spring-jpa") {
 	jar {
 		enabled = true
 	}
-
-    dependencies {
-		implementation 'com.h2database:h2:2.1.210'
-		implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    }
+	
 }
 
 project(":common") {

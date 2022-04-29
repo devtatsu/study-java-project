@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.example.demo.common.exception.DemoDbException;
+
 import com.example.demo.controller.request.EmployeePostRequest;
 import com.example.demo.jpa.domain.models.Employee;
 import com.example.demo.jpa.domain.repositories.EmployeeRepository;
@@ -63,6 +65,7 @@ public class EmployeeService {
             this.repository.save(addRecord);
         } catch (DataAccessException e) {
             logger.error("Error Message(DataAccessException):{}", e.getMessage());
+            throw new DemoDbException(e.getMessage(), "エラー");
         }
 
     }

@@ -2,6 +2,18 @@
 
 `https://spring.pleiades.io/guides/gs/rest-service/`
 
+## 必要なもの
+
+このサンプルを利用するにあたり必要なもの
+
+- [VSCode(Visual Studio Code)](https://code.visualstudio.com/)（※1）
+- git
+開発環境のOSにあわせて、以下どちらかをインストール
+ - [Windows版](https://gitforwindows.org/)
+ - [Mac版](https://git-scm.com/download/mac)
+
+※1 必須ではないが、推奨
+
 ## Gradle
 
 - クリーン
