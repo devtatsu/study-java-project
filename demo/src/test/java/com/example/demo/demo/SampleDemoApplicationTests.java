@@ -24,9 +24,11 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.demo.application.common.constants.AppServerServiceURI;
+import org.springframework.test.context.TestPropertySource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations = "/application.local.properties")
 public class SampleDemoApplicationTests {
 
 	private static final Logger logger = LoggerFactory.getLogger(SampleDemoApplicationTests.class);
@@ -56,7 +58,8 @@ public class SampleDemoApplicationTests {
 
 		outStartEndMsg();
 
-		ResponseEntity<Greeting> result = this.testRestTemplate.exchange(url, HttpMethod.GET, HttpEntity.EMPTY,
+		ResponseEntity<Greeting> result = this.testRestTemplate.exchange(url,
+				HttpMethod.GET, HttpEntity.EMPTY,
 				new ParameterizedTypeReference<Greeting>() {
 				});
 
@@ -114,7 +117,7 @@ public class SampleDemoApplicationTests {
 
 	/**
 	 * 開始終了のメッセージログ
-	 * 
+	 *
 	 */
 	private void outStartEndMsg() {
 
@@ -137,9 +140,9 @@ public class SampleDemoApplicationTests {
 
 	/**
 	 * メソッド名取得
-	 * 
+	 *
 	 * @return メソッド名
-	 * 
+	 *
 	 */
 	private String getMethodName() {
 		return Thread.currentThread().getStackTrace()[3].getMethodName();
