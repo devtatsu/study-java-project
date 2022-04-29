@@ -36,6 +36,10 @@
 
 `gradle :{$sub-project-name}:build`
 
+## カバレッジレポート
+
+`./gradlew test jacocoTestReport`
+
 ## 実行
 
 - サービス起動
