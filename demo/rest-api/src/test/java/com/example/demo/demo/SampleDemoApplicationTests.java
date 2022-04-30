@@ -24,7 +24,9 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.example.demo.common.constants.AppServerServiceURI;
+import org.springframework.test.context.TestPropertySource;
 
+@TestPropertySource(locations = "/application.local.properties")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class SampleDemoApplicationTests {

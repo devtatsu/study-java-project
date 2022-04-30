@@ -18,12 +18,28 @@ jar {
 	enabled = false
 }
 
+// カバレッジレポート除外リスト
+def jacocoExclusions = [
+	'**/common/constants/*',
+	'**/controller/request/*',
+	'**/controller/response/*',
+	'**/resource/*',
+	'**/domain/models/*',
+	'**/demo/DemoApplication.class'
+];
+
 subprojects {
 
     apply plugin: "java"
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
 	apply plugin: "jacoco"
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.junit:junit-bom:5.4.2"
+		}
+	}
 
 	group = 'com.example'
 	version = '0.0.1-SNAPSHOT'
@@ -43,9 +59,12 @@ subprojects {
 	dependencies {
 		implementation 'org.springframework.boot:spring-boot-starter-web'
 		testImplementation('org.springframework.boot:spring-boot-starter-test') {
-			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+			exclude group: 'junit', module: 'junit'
 		}
-		implementation 'junit:junit:4.+'
+		testImplementation 'org.junit.jupiter:junit-jupiter'//JUnit5のAPI
+		testRuntimeOnly 'org.junit.platform:junit-platform-launcher'//IDEなどのサポート用
+		testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'//JUnit3,4対応
+		testCompileOnly 'junit:junit'//Junit5のBOMからJunit4を入れなおせば、4以前のテストも競合しないようです
 		implementation 'org.projectlombok:lombok'
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
@@ -57,16 +76,27 @@ subprojects {
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	}
 
-    test {
-        useJUnitPlatform()
-		// finalizedBy jacocoTestReport // report is always generated after tests run
-    }
-
-	// jacoco {
-	// 	toolVersion = "0.7.+"
-	// }
+    // test {
+    //     useJUnitPlatform()
+    // }
 
 	tasks.withType(AbstractCompile).each { it.options.encoding = 'UTF-8' }
+
+	test.finalizedBy jacocoTestReport
+
+	jacocoTestReport {
+
+		reports {
+			html.enabled = true
+		}
+
+		afterEvaluate {
+			classDirectories.setFrom(classDirectories.files.collect {
+				fileTree(dir: it, excludes: jacocoExclusions )
+			})
+		}
+
+	}
 
 	sourceSets {
 		main {
@@ -86,24 +116,6 @@ subprojects {
 
 }
 
-task testReport(type: TestReport) {
-    reportOn subprojects.tasks.test.binResultsDir
-    destinationDir file("$buildDir/reports/tests/test")
-}
-
-task jacocoMerge(type: JacocoMerge) {
-    executionData project(':rest-api').tasks.test.jacoco.destinationFile
-    executionData project(':spring-jpa').tasks.test.jacoco.destinationFile
-	executionData project(':common').tasks.test.jacoco.destinationFile
-}
-
-task jacocoReport(type: JacocoReport) {
-    dependsOn jacocoMerge
-
-    executionData jacocoMerge.destinationFile
-    // sourceSets *subprojects.sourceSets.main
-}
-
 project(":rest-api") {
 
     bootJar {
@@ -118,6 +130,7 @@ project(":rest-api") {
 		implementation project(':spring-jpa')
 		implementation project(":common")
     }
+
 }
 
 project(":spring-jpa") {

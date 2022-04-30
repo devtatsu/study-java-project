@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import com.example.demo.common.constants.AppServerServiceURI;
 import com.example.demo.controller.response.GreetingResponse;
 
-public class DemoApplicationTests3 extends RestApiBaseTest<DemoApplicationTests3, String, GreetingResponse> {
+public class DemoApplicationSingleTests extends RestApiBaseTest<DemoApplicationSingleTests, String, GreetingResponse> {
 
 	@Override
 	public void setProperty() {
-		super.logCls = DemoApplicationTests3.class;
+		super.logCls = DemoApplicationSingleTests.class;
 		super.responseCls = GreetingResponse.class;
 	}
 
