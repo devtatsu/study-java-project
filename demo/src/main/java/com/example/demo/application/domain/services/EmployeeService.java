@@ -123,12 +123,14 @@ public class EmployeeService {
 
     }
 
+    // CHECKSTYLE:OFF
     /**
      * 連番フォーマット(4桁、0埋め)
      * 
      * @return フォーマットした連番
      * 
      */
+    // CHECKSTYLE:ON
     private String formatSerialNo() {
         return String.format(SERIAL_NO_FORMAT_TMPL, this.newSerialNo);
     }
