@@ -1,24 +1,34 @@
 {
-    "java.configuration.updateBuildConfiguration": "disabled",
-    "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            // "PowerShell"と"Git Bush"に対してはパスを指定する必要がない
-            "source": "PowerShell",
-            // PowerShellの実行ファイル名の後ろに引数を付けて、
-            // 実行させることが可能
-            "args": [
-                // コマンド実行後もPowerShellを閉じない
-                "-NoExit",
-                // 文字コードをUTF-8に変更するコマンドを実行
-                "-Command",
-                "chcp 65001",
-                // "Active code page: 65001"を表示しないためのコマンド
-                // 下記のコマンドは出力を捨てることが可能
-                "|",
-                "Out-Null",
-                // おまけ①: 好みでコマンドを後ろに続ける
-                ";",
-            ],
-        },
-    }
+	"java.configuration.updateBuildConfiguration": "disabled",
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			// "PowerShell"と"Git Bush"に対してはパスを指定する必要がない
+			"source": "PowerShell",
+			// PowerShellの実行ファイル名の後ろに引数を付けて、
+			// 実行させることが可能
+			"args": [
+				// コマンド実行後もPowerShellを閉じない
+				"-NoExit",
+				// 文字コードをUTF-8に変更するコマンドを実行
+				"-Command",
+				"chcp 65001",
+				// "Active code page: 65001"を表示しないためのコマンド
+				// 下記のコマンドは出力を捨てることが可能
+				"|",
+				"Out-Null",
+				// おまけ①: 好みでコマンドを後ろに続ける
+				";",
+			],
+		},
+	},
+	"java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+	"java.format.settings.profile": "GoogleStyle",
+	"[java]": {
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true,
+		"editor.detectIndentation": false,
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"editor.formatOnType": true,
+	},
 }
