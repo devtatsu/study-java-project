@@ -18,14 +18,26 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeController {
 
+    /** 社員情報登録Service. */
     private final EmployeeService service;
 
-    @PostMapping(value = AppServerServiceURI.POST_EMPLOYEE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addEmployee(@RequestBody @Validated EmployeePostRequest request) {
+    /**
+     * 社員情報登録API.
+     * 
+     * @param request リクエスト body
+     * @return HTTPステータス
+     * 
+     */
+    @PostMapping(value = AppServerServiceURI.POST_EMPLOYEE,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> addEmployee(
+            @RequestBody @Validated final EmployeePostRequest request) {
 
         this.service.addData(request);
 
         return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
 }

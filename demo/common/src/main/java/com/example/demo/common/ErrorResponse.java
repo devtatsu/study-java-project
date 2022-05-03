@@ -7,10 +7,11 @@ import lombok.Data;
 @Data
 public class ErrorResponse {
 
-    // エラーコード
+    /** エラーコード. */
     @JsonProperty("code")
     private String code;
-    // エラーメッセージ
+
+    /** エラーメッセージ. */
     @JsonProperty("msg")
     private String msg;
 

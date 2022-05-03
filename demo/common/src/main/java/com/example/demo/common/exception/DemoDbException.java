@@ -1,19 +1,28 @@
 package com.example.demo.common.exception;
 
 import lombok.Getter;
+import lombok.Setter;
 
 public class DemoDbException extends RuntimeException {
 
-    /** シリアルバージョンUID */
+    /** シリアルバージョンUID. */
     private static final long serialVersionUID = 1L;
 
-    // 障害コード
+    /** 障害コード. */
+    @Setter
     @Getter
-    private String code;
+    private String errCode;
 
-    public DemoDbException(String message, String code) {
+    /**
+     * DB関連のException.
+     * 
+     * @param message メッセージ
+     * @param code コード
+     * 
+     */
+    public DemoDbException(final String message, final String code) {
         super(message);
-        this.code = code;
+        this.errCode = code;
     }
 
 }

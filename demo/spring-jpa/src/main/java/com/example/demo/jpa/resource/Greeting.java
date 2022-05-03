@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Greeting {
 
-	private long id;
+    /** ID. */
+    private long id;
 
-	private String content;
+    /** 内容. */
+    private String content;
 
 }

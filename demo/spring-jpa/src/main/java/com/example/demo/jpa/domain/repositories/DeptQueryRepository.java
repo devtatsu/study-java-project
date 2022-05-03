@@ -12,14 +12,25 @@ import com.example.demo.jpa.common.constants.QueryName;
 @Repository
 public class DeptQueryRepository {
 
+    /** EntityManager. */
     @PersistenceContext
-    EntityManager entityMgr;
+    private EntityManager entityMgr;
 
-    public List<DeptQuery> findTest(long id) {
+    /**
+     * 部門情報検索.
+     * 
+     * @param id 検索キー
+     * @return 検索結果リスト
+     * 
+     */
+    public List<DeptQuery> findTest(final long id) {
 
-        return this.entityMgr.createNamedQuery(QueryName.GET_DEPT, DeptQuery.class)
-                .setParameter("paramId", id)
-                .getResultList();
+        // @formatter:off
+        return this.entityMgr.createNamedQuery(
+                                QueryName.GET_DEPT,
+                    DeptQuery.class)
+                            .setParameter("paramId", id).getResultList();
+        // @formatter:on
 
     }
 

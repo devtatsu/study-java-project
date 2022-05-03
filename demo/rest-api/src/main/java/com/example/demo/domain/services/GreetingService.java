@@ -19,9 +19,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GreetingService {
 
+    /** 部門Repository. */
     private final DeptRepository repository;
+    /** 部門QueryRepository. */
     private final DeptQueryRepository repository2;
 
+    /**
+     * 部門情報リスト取得（全件）.
+     * 
+     * @return 部門情報リスト
+     * 
+     */
     @Transactional
     public List<GreetingResponse> getAccountInfo() {
 
@@ -50,6 +58,12 @@ public class GreetingService {
 
     }
 
+    /**
+     * 部門情報リスト取得（ID検索）.
+     * 
+     * @return 部門情報リスト
+     * 
+     */
     @Transactional
     public List<GreetingResponse> getFind() {
 
