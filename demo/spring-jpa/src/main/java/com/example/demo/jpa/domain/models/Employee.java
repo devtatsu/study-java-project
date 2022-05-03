@@ -12,30 +12,30 @@ import javax.persistence.Column;
 @Entity(name = "employee")
 public class Employee implements Serializable {
 
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
-    // 社員ID
+    /** 社員ID. */
     @Id
     @Column(name = "employee_id")
     private long employeeId;
 
-    // 氏名（姓）
+    /** 氏名（姓）. */
     @Column(name = "firstname")
     private String firstname;
 
-    // 氏名（名）
+    /** 氏名（名）. */
     @Column(name = "lastname")
     private String lastname;
 
-    // 所属部署
+    /** 所属部署. */
     @Column(name = "department")
     private String department;
 
-    // 入社日
+    /** 入社日. */
     @Column(name = "hire_date")
     private int hireDate;
 
-    // 連番
+    /** 連番. */
     @Column(name = "serial_no")
     private int serialNo;
 

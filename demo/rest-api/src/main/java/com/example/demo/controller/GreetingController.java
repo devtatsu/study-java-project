@@ -21,32 +21,65 @@ import org.springframework.http.MediaType;
 @RequiredArgsConstructor
 public class GreetingController {
 
-	private static final String template = "Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
+    /** 部門情報フォーマット用テンプレート. */
+    // private static final String defaultTemp = "Hello, %s!";
+    private final String defaultTemp = "Hello, %s!";
+    /** 社員ID. */
+    private final AtomicLong counter = new AtomicLong();
 
-	private final GreetingService service;
+    /** 部門情報取得Service. */
+    private final GreetingService service;
 
-	@GetMapping(AppServerServiceURI.GREETING)
-	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Greeting(counter.incrementAndGet(), String.format(template, name));
-	}
+    /**
+     * 部門情報取得.
+     * 
+     * @param name 部門名
+     * @return 部門情報
+     * 
+     */
+    // @formatter:off
+    @GetMapping(AppServerServiceURI.GREETING)
+    public Greeting greeting(
+            @RequestParam(
+                value = "name",
+                defaultValue = "World")
+                final String name) {
+        return new Greeting(
+            counter.incrementAndGet(), 
+            String.format(defaultTemp, name));
+        
+    }
+    // @formatter:on
 
-	@GetMapping(AppServerServiceURI.GET_GREETING)
-	public ResponseEntity<List<GreetingResponse>> getGreeting() {
+    /**
+     * 部門情報取得.
+     * 
+     * @return 部門情報リスト
+     * 
+     */
+    @GetMapping(AppServerServiceURI.GET_GREETING)
+    public ResponseEntity<List<GreetingResponse>> getGreeting() {
 
-		List<GreetingResponse> retEntity = this.service.getAccountInfo();
+        List<GreetingResponse> retEntity = this.service.getAccountInfo();
 
-		return new ResponseEntity<>(retEntity, HttpStatus.OK);
+        return new ResponseEntity<>(retEntity, HttpStatus.OK);
 
-	}
+    }
 
-	@GetMapping(value = AppServerServiceURI.GET_GREETING_TEST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<GreetingResponse>> getGreetingTest() {
+    /**
+     * 部門情報取得 テスト用.
+     * 
+     * @return 部門情報リスト
+     * 
+     */
+    @GetMapping(value = AppServerServiceURI.GET_GREETING_TEST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<GreetingResponse>> getGreetingTest() {
 
-		List<GreetingResponse> retEntity = this.service.getFind();
+        List<GreetingResponse> retEntity = this.service.getFind();
 
-		return new ResponseEntity<>(retEntity, HttpStatus.OK);
+        return new ResponseEntity<>(retEntity, HttpStatus.OK);
 
-	}
+    }
 
 }

@@ -13,14 +13,14 @@ import lombok.Data;
 @Entity(name = "DEPT")
 public class DeptModel implements Serializable {
 
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
-    // ID
+    /** ID. */
     @Id
     @Column(name = "id")
     private long id;
 
-    // 氏名
+    /** 氏名. */
     @Column(name = "name")
     private String name;
 

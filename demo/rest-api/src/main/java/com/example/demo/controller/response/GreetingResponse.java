@@ -13,11 +13,11 @@ public class GreetingResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // ID
+    /** ID. */
     @JsonProperty("id")
     private long id;
 
-    // 氏名
+    /** 氏名. */
     @JsonProperty("name")
     private String name;
 

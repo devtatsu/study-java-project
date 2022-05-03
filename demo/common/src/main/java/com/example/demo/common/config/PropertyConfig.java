@@ -9,6 +9,7 @@ import lombok.Data;
 @Configuration
 public class PropertyConfig {
 
+    /** 基本URL. */
     @Value("${app.baseurl}")
     private String baseurl;
 
