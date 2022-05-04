@@ -1,5 +1,12 @@
 name: learn-github-actions
-on: [push]
+# on: [push]
+
+on:
+  push:
+    branches:
+      - '**'    # matches every branch
+      - '!main' # excludes main
+
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
