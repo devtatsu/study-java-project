@@ -11,4 +11,4 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "this is pen"
+      - run: echo "this is pen2"
