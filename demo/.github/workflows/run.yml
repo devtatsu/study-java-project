@@ -4,8 +4,8 @@ on: [push]
 # on:
 #   push:
 #     branches:
-#       - '**'    # matches every branch
-#       - '!main' # excludes main
+#       - '**'      # matches every branch
+#       - '!master' # excludes master
 
 jobs:
   check-bats-version:
