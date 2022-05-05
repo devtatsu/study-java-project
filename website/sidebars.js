@@ -16,7 +16,20 @@ module.exports = {
       label: 'はじめに',
       items: [
         'my-home',
-        'home',
+	    {
+	      type: 'category',
+	      label: 'GIT',
+	      items: [
+	        'gitstudy/cmd-collection',
+	      ],
+	    },
+	    {
+	      type: 'category',
+	      label: 'SPRING BOOT',
+	      items: [
+	        'springboot/spring-boot-setting',
+	      ],
+	    }
       ],
     },
     {
@@ -26,6 +39,6 @@ module.exports = {
         'content/introduction-docusaurus',
         'content/create-docusaurus',
       ],
-    }
+    },
   ],
 };
