@@ -4,6 +4,10 @@
 
 https://zatta.link/web/docusaurus-how-to.html
 
+`website`配下で、以下を実行するとローカルで実行できる
+
+`npm start`
+
 ## spring initializr
 https://start.spring.io/
 
