@@ -10,35 +10,42 @@
  */
 
 module.exports = {
-  mySidebar: [
-    {
-      type: 'category',
-      label: 'はじめに',
-      items: [
-        'my-home',
-	    {
-	      type: 'category',
-	      label: 'GIT',
-	      items: [
-	        'gitstudy/cmd-collection',
-	      ],
-	    },
-	    {
-	      type: 'category',
-	      label: 'SPRING BOOT',
-	      items: [
-	        'springboot/spring-boot-setting',
-	      ],
-	    }
-      ],
-    },
-    {
-      type: 'category',
-      label: 'コンテンツ',
-      items: [
-        'content/introduction-docusaurus',
-        'content/create-docusaurus',
-      ],
-    },
-  ],
+	mySidebar: [
+		{
+			type: 'category',
+			label: 'はじめに',
+			items: [
+				'my-home',
+				{
+					type: 'category',
+					label: 'GIT',
+					items: [
+						'gitstudy/cmd-collection',
+					],
+				},
+				{
+					type: 'category',
+					label: 'SPRING BOOT',
+					items: [
+						'springboot/spring-boot-setting',
+					],
+				},
+				{
+					type: 'category',
+					label: 'CI/CD',
+					items: [
+						'cicd/cicd-setting',
+					],
+				}
+			],
+		},
+		{
+			type: 'category',
+			label: 'コンテンツ',
+			items: [
+				'content/introduction-docusaurus',
+				'content/create-docusaurus',
+			],
+		},
+	],
 };
