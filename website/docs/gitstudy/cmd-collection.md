@@ -1,46 +1,74 @@
+---
+sidebar_label: Git操作の基本
+title: Git操作の基本と説明
+---
+
+多くのプロジェクトではGitを利用する場合、GUIツール（[TortoiseGit](https://tortoisegit.org/) 等）を利用しています。
+ですが、Gitの基本を理解することが少なかったりするので、ここでは、説明と併せてコマンドベースで説明していきます。
+
 ## ローカルの変更をステージングへ追加
 
 - ローカルの変更を全てステージングへ追加する
 
-`git add .`
+```shell
+git add .
+```
 
 - ローカルの変更の中から一部をステージングへ追加する
 
-`git add {file_name}`
+```shell
+git add ${file_name}
+```
 
 ## ローカルリポジトリへコミット
 
-`git commit -m ‘メッセージ’`
+```shell
+git commit -m 'メッセージ'
+```
 
 ## リモートリポジトリへプッシュ
 
-`git push`
+```shell
+git push
+```
 
-＜注意＞
+:::caution
 誤ったブランチへプッシュしない為に`push`前に現在のブランチを確認する。
+`git branch --contains`を実行して、その結果が現在のブランチになります。
+:::
 
 ## Addの取り消し
 
 - 特定のファイルのみ取り消す
 
-`git reset HEAD {file_name}`
+```shell
+git reset HEAD ${file_name}
+```
 
 - 全てのファイルを取り消す（これ使ったことない）
 
-`git reset HEAD`
+```shell
+git reset HEAD
+```
 
 ## Pushの取り消し
 
+```shell
 1. `git reset —hard HEAD^`
-1. `git push origin +{branch_name}`
+1. `git push origin +${branch_name}`
+```
 
 ## ローカル編集の取り消し
 
-`git checkout .`
+```shell
+git checkout .
+```
 
 ## 変更のあるファイル一覧を確認
 
-`git diff —name-only`
+```shell
+git diff —name-only
+```
 
 ## Git ブランチ操作
 
@@ -48,17 +76,22 @@
 
 - ブランチの一覧を取得
 
-`git branch -a`
+```shell
+git branch -a
+```
+
 `-a`をつけるとリモート分も含んで一覧出力される
 
 ### ブランチの切り替え
 
-`git switch {branch-name}`
+```shell
+git switch ${branch-name}
+```
 
+```shell
+git checkout feature/backend-sample
 ```
-`git checkout feature/backend-sample`
 リモートのブランチを初めて切り替える場合、`remotes/origin/`部分はいらない
-```
 
 ### ブランチの確認
 
@@ -67,24 +100,40 @@
 ### ブランチの作成
 
 - 作成元になるブランチへ切り替える
-`git switch {branch-name}`
+
+```shell
+git switch ${branch-name}
+```
 
 - ローカルリポジトリ内にブランチを作成
-`git checkout -b {branch-name}`
+
+```shell
+git checkout -b ${branch-name}
+```
 
 - リモートリポジトリへ作成したブランチを登録
-`git push -u origin {branch-name}`
+
+```shell
+git push -u origin ${branch-name}
+```
+
+### ブランチの削除
+
+```shell
+git branch -d ${branch-name}
+```
 
 ### ブランチのマージ
 
-コミット
-git commit -m”feature/upgrade-expo-42” -m”修正 コミットログの取込み(Flipperの無効)”
+ローカルリポジトリ内で、ブランチ同士のマージ方法を説明します。
+ここでの説明は、`master`ブランチを`feature/test`ブランチへマージすることを想定したものになります。
 
-・マージ
-master → feature/upgrade-expo-42へマージしたい場合
+1. ローカルリポジトリを最新化する。
+1. ローカルリポジトリのブランチがマージ先（`feature/test`）のブランチになっていることを確認。
+1. 取込みたいブランチ（`master`）を指定してマージを実行。
 
-１．マージ元（master）を最新版をpullする
-２．現在のブランチがマージ先のブランチ（feature/upgrade-expo-42）になっていることを確認 
-	git branch
-３．取込みたいブランチを指定してマージを実行
-	git merge master
+```console title="コマンド実行例"
+1. git pull
+2. git branch --contains
+3. git merge master
+```

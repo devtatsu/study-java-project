@@ -1,6 +1,6 @@
 ---
-sidebar_label: CI/CD
-title: CI/CD
+sidebar_label: 概要
+title: 概要
 ---
 
 ![CI/CD](img/cicd.png)

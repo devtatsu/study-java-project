@@ -12,29 +12,63 @@
 module.exports = {
 	mySidebar: [
 		{
+			type: 'doc',
+			id: 'home',
+		},
+		{
 			type: 'category',
-			label: 'はじめに',
+			label: 'Let\'s Study',
 			items: [
-				'my-home',
 				{
 					type: 'category',
-					label: 'GIT',
+					label: '開発環境構築',
 					items: [
-						'gitstudy/cmd-collection',
+						'development-setting/setting-manual',
 					],
 				},
 				{
 					type: 'category',
-					label: 'SPRING BOOT',
+					label: 'Sample Code',
 					items: [
-						'springboot/spring-boot-setting',
+						'sample-code/overview',
+						'sample-code/spring-boot-setting',
+						{
+							type: 'category',
+							label: 'REST API',
+							items: [
+								'sample-code/rest-api/overview',
+								{
+									type: 'category',
+									label: '設計',
+									items: [
+										'sample-code/rest-api/design/overview',
+										'sample-code/rest-api/design/input-output-document',
+									],
+								},
+								'sample-code/rest-api/pg-documents',
+								'sample-code/rest-api/test-documents',
+							],
+						},
 					],
 				},
 				{
 					type: 'category',
-					label: 'CI/CD',
+					label: 'GitHub関連',
 					items: [
-						'cicd/cicd-setting',
+						{
+							type: 'category',
+							label: 'GIT',
+							items: [
+								'gitstudy/cmd-collection',
+							],
+						},
+						{
+							type: 'category',
+							label: 'CI/CD',
+							items: [
+								'cicd/overview',
+							],
+						},
 					],
 				}
 			],

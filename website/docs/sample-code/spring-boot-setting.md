@@ -1,3 +1,14 @@
+---
+sidebar_label: 開発環境構築
+title: 開発環境の構築手順
+---
+
+サンプルとして紹介するプロジェクトの設定内容と方法を紹介します。
+
+## ビルドツール
+
+ビルドツールは、[Gradle](https://docs.gradle.org/current/userguide/what_is_gradle.html)を使用しています。
+
 ## 各種ツール
 
 このリポジトリには、以下のツールを導入しています。
@@ -32,7 +43,7 @@ demo
 
 - build.gradle
 
-```
+```gradle
 
 plugins {
 	id 'checkstyle'
@@ -81,7 +92,7 @@ demo
 
 作成した`suppressions.xml`の内容は以下の通りです。
 
-```
+```xml
 
 <?xml version="1.0"?>
 <!DOCTYPE suppressions PUBLIC
@@ -102,7 +113,7 @@ demo
 上記で作成した`suppressions.xml`を読み込むように、`checkstyle.xml`へ、以下のとおり追記または、修正します。
 `${config_loc}`はCheckstyleのビルトインのプロパティでプロジェクト直下の`config`フォルダの意味になります。
 
-```
+```xml
 
 <module name="SuppressionFilter">
  <property name="file" value="${config_loc}/suppressions.xml"/>
@@ -133,7 +144,7 @@ demo
 
 - build.gradle
 
-```
+```gradle
 
 plugins {
 	id "com.github.spotbugs" version "5.0.6"
@@ -177,7 +188,7 @@ subprojects {
 
 ```
 
-```
+```console
 
 > Task :rest-api:spotbugsMain
 SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
@@ -188,7 +199,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 
 上記に対応するため、`dependencies`に以下を入れています。
 
-```
+```gradle
 
 dependencies {
     spotbugsSlf4j group: 'org.slf4j', name: 'slf4j-api', version: '1.8.0-beta4'
@@ -206,7 +217,7 @@ dependencies {
 
 - build.gradle
 
-```
+```gradle
 
 plugins {
 	id 'jacoco'
@@ -307,7 +318,8 @@ JUnit5とJUnit4を含めた以前のバージョンを共存させる設定を�
 
 - build.gradle
 
-```
+```gradle
+
 subprojects {
 
     // --- 省略 ---
@@ -344,7 +356,7 @@ subprojects {
 
 JUnit5を利用する場合は、以下のコメントを外すことで利用可能です。
 
-```
+```gradle
 
 // test {
 //     useJUnitPlatform()
@@ -358,7 +370,7 @@ JUnit5を利用する場合は、以下のコメントを外すことで利用�
 
 - build.gradle
 
-```
+```gradle
 
 // ここはルートプロジェクトに対する設定
 
@@ -421,7 +433,7 @@ project(":common") {
 テストコードで、`@Sql`を利用して、テスト時に必要となるテストデータを設定するsqlファイルの読み込み先を
 `build.gradle`へ以下のように設定します。
 
-```
+```gradle
 
 sourceSets {
 	main {
@@ -455,7 +467,7 @@ vsCodeを使用して、設定内容を共通化する際の各種設定方法�
 ルート直下に`.vscode`フォルダを作成して、その直下に`extensions.json`ファイルを作成します。
 その作成したjsonファイル内に自身でインストールした拡張機能を以下のように定義していきます。
 
-```
+```json
 
 {
     "recommendations": [
@@ -478,7 +490,7 @@ vscodeを起動した際にインストールを促すポップアップが表�
 ルート直下に`.vscode`フォルダを作成して、その直下に`settings.json`ファイルを作成します。
 その作成したjsonファイル内にフォーマッタを以下のように定義します。
 
-```
+```json
 
 "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
 "java.format.settings.profile": "GoogleStyle",
@@ -491,7 +503,7 @@ vscodeを起動した際にインストールを促すポップアップが表�
 次にフォーマッタをソースのペーストや保存時に自動で実行してくれる設定を定義します。
 これも、`settings.json`内へ定義します。
 
-```
+```json
 
 "[java]": {
 	"editor.formatOnPaste": true,
@@ -511,7 +523,7 @@ vscodeを起動した際にインストールを促すポップアップが表�
 ルート直下に`.vscode`フォルダを作成して、その直下に`settings.json`ファイルを作成します。
 その作成したjsonファイル内にタブやを以下のように定義します。
 
-```
+```json
 
 "[java]": {
 	"editor.tabSize": 4,
@@ -532,7 +544,7 @@ vscodeを起動した際にインストールを促すポップアップが表�
 ルート直下に`.vscode`フォルダを作成して、その直下に`settings.json`ファイルを作成します。
 その作成したjsonファイル内へ以下のように定義します。
 
-```
+```json
 
 "terminal.integrated.profiles.windows": {
 	"PowerShell": {
