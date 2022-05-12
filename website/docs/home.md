@@ -31,5 +31,5 @@ title: はじめに
   - 工程毎の開始と終了条件
 - Git
   - [Git操作](./gitstudy/cmd-collection)
-  - [CI & CD](./cicd/cicd-setting)
+  - [CI & CD](./cicd/overview)
 - トラブルシューティング
