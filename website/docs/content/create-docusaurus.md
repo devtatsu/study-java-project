@@ -329,8 +329,16 @@ npm run serve
 
 以下のコマンドを実行して、デプロイする。
 
-```console title="デプロイコマンド"
-cmd /C 'set "GIT_USER={git user}(※1)" && set "GIT_PASS={git user}(※2)" && yarn deploy'
+```shell title="デプロイコマンド(Bash)"
+GIT_USER=${git user}(※1) GIT_PASS=${git user}(※2) yarn deploy
+```
+
+```bat title="デプロイコマンド(Windows)"
+cmd /C "set "GIT_USER=${git user}(※1)" && set "GIT_PASS=${git user}(※2)" && yarn deploy"
+```
+
+```bat title="デプロイコマンド(PowerShell)"
+cmd /C 'set "GIT_USER=${git user}(※1)" && set "GIT_PASS=${git user}(※2)" && yarn deploy'
 ```
 
 デプロイすると、`gh-pages`ブランチが作成されて、ビルドしたファイルだけがgh-pagesブランチに展開される。
